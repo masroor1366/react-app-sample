@@ -29,6 +29,9 @@ const Content = ()=>{
                 <Route path='/' element={ isUser ? <Users/> : <Navigate replace to="/posts"/> }     /> //replace jast for save backthe page
                 <Route path='/user/add' element={<AddUser/>} >
                     <Route path=':userId' element={<EditDesc/>}></Route>
+                    // <Route path=':userId/edite' element={<EditDesc/>}></Route>
+                    // <Route path=':userId/:element' element={<EditDesc/>}></Route>
+                    // <Route path='edit/:id' element={<EditDesc/>}></Route> // نکته: اول path نباید / آورده شود
                 </Route>
                 <Route path='/posts' element={<Posts/>}></Route>
                 <Route path='/gallery' element={<Gallery/>}></Route>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { useParams , Outlet } from 'react-router';
 import style from '../style.module.css'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const AddUser = ()=>{
 
     const {userId} = useParams();//استفاده از پارامتری که ارسال شده 
+    const navigate=useNavigate();
+    
 
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid container`}>
@@ -43,10 +45,17 @@ const AddUser = ()=>{
                     </div>
 
                     <div className="col-12 text-start">
-                        <Link to="/">
-                        <button type="button" class="btn btn-danger ms-2">بازگشت</button>
-                        </Link>
+                         
+                        {/*<button type="button" class="btn btn-danger ms-2"
+                            onClick={()=>navigate("/")}                        
+                        >بازگشت</button>*/}
+
+                        <button type="button" class="btn btn-danger ms-2"
+                        onClick={()=>navigate(-1)}    //به یک صفحه قبل تر برگرد                    
+                        >  بازگشت</button>
+                         
                         <button type="submit" class="btn btn-primary" >
+                        
                         {userId ? "ویرایش " : "افزودن " }
                         </button>
                     </div>
