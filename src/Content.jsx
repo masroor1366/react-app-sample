@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MainContext } from './contexts/MainContext';
 import Gallery from './gallery/Gallery';
 import Posts from './posts/Posts';
  import style from './style.module.css'
 import Todos from './todos/Todos';
 import Users from './users/Users';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 const Content = ()=>{
 
     const {showMenu,setShowMenu} = useContext(MainContext)
+    const [isUser,setIsUser]=useState(true)
 
     const handleShowMenu = (event)=>{
         event.stopPropagation()
@@ -23,10 +24,11 @@ const Content = ()=>{
             onClick={handleShowMenu}
             ></i>
             <Routes>
-                <Route path='/' element={<Users/>}     />
+                <Route path='/' element={ isUser ? <Users/> : <Navigate replace to="/posts"/> }     /> //replace jast for save backthe page
                 <Route path='/posts' element={<Posts/>}></Route>
                 <Route path='/gallery' element={<Gallery/>}></Route>
-                <Route path='/todos'  element={ <Todos/>}></Route>
+                <Route path='/todos/*'  element={ <Todos/>}></Route>
+                <Route path='*' element={<Users/>}></Route>//معمولا خطای 404 یا این پیج موجود نمی باشد را می گذارند
             </Routes>
         </div>
     )
