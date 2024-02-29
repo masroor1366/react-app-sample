@@ -1,9 +1,32 @@
 import React from 'react';
 import style from '../style.module.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Users = ()=>{
     const navigate=useNavigate();
+    const param=useLocation();
+    console.log('param پارامتری که از زدن دکمه برگشت در اینجا دریافت می وشد')
+    console.log(param)
+
+    const handleDelete = (itemId)=>{
+        swal({
+            title: "https://sweetalert2.github.io/    حذف رکورد !",
+            text: `    آیا از حذف رکورد ${itemId} اطمینان دارید؟`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("حذف با موفقیت انجام شد", {
+                icon: "success",
+              });
+            } else {
+              swal("شما از حذف رکورد منصرف شدید");
+            }
+          });
+    }
 
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid`}>
@@ -41,11 +64,13 @@ const Users = ()=>{
                             <i className="fas fa-edit text-warning mx-2 pointer"
                                 onClick={()=>{
                                     //action...
-                                    return navigate("/user/add/2")
+                                    return navigate("/user/add/2",{state:{x:2,y:3}})
                                 }}                            
                             ></i>
-                            
-                            <i className="fas fa-trash text-danger mx-2 pointer"></i>
+                            <Link to="/user/add" state={"vue"}>
+                            <i className="fas fa-trash text-danger mx-2 pointer"
+                            onClick={()=>handleDelete(1)}></i>
+                            </Link>
                         </td>
                     </tr>
                 </tbody>

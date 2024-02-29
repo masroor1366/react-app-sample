@@ -1,12 +1,15 @@
 import React from 'react';
 import { useParams , Outlet } from 'react-router';
 import style from '../style.module.css'
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate ,useLocation} from 'react-router-dom';
+
 
 const AddUser = ()=>{
 
-    const {userId} = useParams();//استفاده از پارامتری که ارسال شده 
+    const {userId} = useParams();// در لینک ارسال می شود استفاده از پارامتری که ارسال شده 
     const navigate=useNavigate();
+    const getParametrFromLocation=useLocation();// در state گذاشته می شود
+    console.log(getParametrFromLocation)
     
 
     return (
@@ -16,45 +19,45 @@ const AddUser = ()=>{
             </h4>
             <div className="row justify-content-center mt-5 ">
                 <form className="col-12 col-md-6 bg-light rounded shadow-lg p-3">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">نام و نام خانوادگی</label>
-                        <input type="text" class="form-control"/>
+                    <div className= "mb-3">
+                        <label className="form-label">نام و نام خانوادگی</label>
+                        <input type="text" className= "form-control"/>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">نام کاربری</label>
-                        <input type="text" class="form-control"/>
+                    <div className= "mb-3">
+                        <label  className= "form-label">نام کاربری</label>
+                        <input type="text" className= "form-control"/>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">ایمیل</label>
-                        <input type="email" class="form-control"/>
+                    <div className= "mb-3">
+                        <label  className= "form-label">ایمیل</label>
+                        <input type="email" className= "form-control"/>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="exampleInputEmail1" class="form-label">آدرس</label>
+                    <div className= "mb-3 row">
+                        <label  className= "form-label">آدرس</label>
                         <div className="col-6 my-1">
-                            <input type="text" class="form-control" placeholder="شهر"/>
+                            <input type="text" className= "form-control" placeholder="شهر"/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" class="form-control" placeholder="خیابان"/>
+                            <input type="text" className= "form-control" placeholder="خیابان"/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" class="form-control" placeholder="ادامه آدرس"/>
+                            <input type="text" className= "form-control" placeholder="ادامه آدرس"/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" class="form-control" placeholder="کد پستی"/>
+                            <input type="text" className= "form-control" placeholder="کد پستی"/>
                         </div>
                     </div>
 
                     <div className="col-12 text-start">
                          
-                        {/*<button type="button" class="btn btn-danger ms-2"
-                            onClick={()=>navigate("/")}                        
-                        >بازگشت</button>*/}
+                        {<button type="button" className= "btn btn-danger ms-2"
+                            onClick={()=>navigate("/",{state:{ppp:'test',id:22}})}                        
+                        >بازگشت</button>}
 
-                        <button type="button" class="btn btn-danger ms-2"
+                       { /*<button type="button" className= "btn btn-danger ms-2"
                         onClick={()=>navigate(-1)}    //به یک صفحه قبل تر برگرد                    
-                        >  بازگشت</button>
+                       >  بازگشت</button>*/}
                          
-                        <button type="submit" class="btn btn-primary" >
+                        <button type="submit" className= "btn btn-primary" >
                         
                         {userId ? "ویرایش " : "افزودن " }
                         </button>
