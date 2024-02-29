@@ -5,6 +5,7 @@ import {MainContext} from './contexts/MainContext'
 import { BrowserRouter } from 'react-router-dom';
 
 const App = ()=>{
+    // for instal  axios : npm i axios 
 
     const [showMenu , setShowMenu] = useState(false);
 

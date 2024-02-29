@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../style.module.css'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import axios from 'axios';
 
 const Users = ()=>{
+
+    const [users,setUsers]=useState([]);
+
+
+    useEffect(()=>{
+        axios.get('https://jsonplaceholder.typicode.com/users').then(res=>{
+            let myres = res.data;
+            console.log(myres)
+            myres=[...myres,{id:66,name: 'Mohammad Ali Masroor', username:'Masroor1366',email:'Masroor.1388@gmail.com'}]
+            console.log(myres)
+             setUsers(myres)
+            //  setUsers(...users,{id:141,name: 'Mohammad Ali Masroor', username:'masroor1366',email:'masroor.1388@gmail.com'})
+
+             
+        }).catch(err=>{
+            console.log(err)
+        })
+    },[]);
     const navigate=useNavigate();
     const param=useLocation();
     console.log('param پارامتری که از زدن دکمه برگشت در اینجا دریافت می وشد')
@@ -43,7 +62,8 @@ const Users = ()=>{
                 </Link>
                 </div>
             </div>
-            <table className="table bg-light shadow">
+            {users.length ? (
+                <table className="table bg-light shadow">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -54,11 +74,14 @@ const Users = ()=>{
                     </tr>
                 </thead>
                 <tbody>
+                {users.map(u=>(
                     <tr>
-                        <td>1</td>
-                        <td>Mohammad Ali Masroor</td>
-                        <td>masroor</td>
-                        <td>masroor.1388@gmail.com</td>
+                    <td>{u.id}</td>
+                    <td>{u.name}</td>
+                    <td>{u.username}</td>
+                    <td>{u.email}</td>
+                    
+                         
                         <td>
                              
                             <i className="fas fa-edit text-warning mx-2 pointer"
@@ -73,8 +96,15 @@ const Users = ()=>{
                             </Link>
                         </td>
                     </tr>
+                ))}
+                    
+
                 </tbody>
             </table>
+            ):(
+                <h4 className="text-center text-info">لطفا صبر کنید...</h4>
+            )}
+            
         </div>
     )
 
