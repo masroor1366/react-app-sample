@@ -3,8 +3,11 @@ import style from '../style.module.css'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
+import WithAlert from '../HOC/WithAlert';
 
-const Users = ()=>{
+const Users = (props)=>{
+
+    const {Confirm,Alert}=props
 
 
 
@@ -33,47 +36,48 @@ const Users = ()=>{
     console.log('param پارامتری که از زدن دکمه برگشت در اینجا دریافت می وشد')
     console.log(param)
 
-    const handleDelete = (itemId,username)=>{
-        swal({
-            title: "حذف رکورد !",
-            text: `آیا از حذف رکورد ${username} اطمینان دارید؟`,
-            icon: "warning",
-            buttons: ["خیر" , "بله"],
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("حذف با موفقیت انجام شد", {
-                icon: "success",
-                buttons: "متوجه شدم",
+    const handleDelete = async (itemId,username)=>{
+        if (
+            await Confirm({
+                title:"حذف رکورد",
+                text:`آیا از حذف رکورد ${username} اطمینان دارید؟`,
+                icon:"warning"
+            })
+        ){
+            axios({
+                method:"DELETE",
+                url:`https://jsonplaceholder.typicode.com/users/${itemId}`
+            }).then(res=>{
 
-              });
-                axios({
-                    method:"DELETE",
-                    url:`https://jsonplaceholder.typicode.com/users/${itemId}`
-                }).then(res=>{
+                if (res.status == 200) {
+                    const newUsers = users.filter(u=>u.id != itemId);
+                    setUsers(newUsers);
+                    Alert({
+                        text:"حذف با موفقیت انجام شد",
+                        icon: "success"
+                    })
+                  
+                }else{
+                    Alert({
+                        text:"عملیات با خطا مواجه شد",
+                        icon: "error"
+                    })
+                   
+                }
 
-                    if (res.status == 200) {
-                        const newUsers = users.filter(u=>u.id != itemId);
-                        setUsers(newUsers);
-                        swal("حذف با موفقیت انجام شد", {
-                            icon: "success",
-                            buttons: "متوجه شدم",            
-                        });
-                    }else{
-                        swal("عملیات با خطا مواجه شد",{
-                            icon:"error",
-                            button:"متوجه شدم"
-                        });
-                    }
+            })
 
-                })
+        }else{
+             
+            Alert({
+                text:"شما از حذف رکورد منصرف شدید",
+                icon: "info"
+            })
+
+        }
 
 
-            } else {
-              swal("شما از حذف رکورد منصرف شدید");
-            }
-          });
+ 
     }
 
            
@@ -140,4 +144,4 @@ const Users = ()=>{
 
 }
 
-export default Users;
+export default  WithAlert(Users)  ;
