@@ -13,7 +13,7 @@ const App = ()=>{
     return (
         <BrowserRouter>        <div>
             <MainContext.Provider value={{showMenu , setShowMenu}}>
-                <Portal/>
+                {/*<Portal/>*/}
                 <Sidebar/>
                 <Content/>            
             </MainContext.Provider>
