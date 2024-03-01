@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams , Outlet } from 'react-router';
 import style from '../style.module.css'
 import { Link,useNavigate ,useLocation} from 'react-router-dom';
 import axios from 'axios'
+import swal from 'sweetalert';
 
 const AddUser = ()=>{
 
@@ -23,12 +24,59 @@ const AddUser = ()=>{
         }
     })
 
+    useEffect(()=>{
+        if (userId){
+        axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`).then(
+            res=>{
+                if(res.status==200){
+                    setData(
+                        {
+                            name: res.data.name ,
+                            username : res.data.username ,
+                            email : res.data.email,
+                            address : {
+                                street: res.data.address.street ,
+                                city: res.data.address.city ,
+                                suite: res.data.address.suite ,
+                                zipcode: res.data.address.zipcode 
+                            }
+                        }
+                    )
+
+                }else{
+                    console.log("error")
+                }
+
+            }
+        ).catch(
+           console.log("Id dont exist")
+         )
+        }
+    },[]);
+
     const handleAddUser = (e)=>{
         e.preventDefault();//جهت جلوگیری از رفرش صفحه
-        axios.post('https://jsonplaceholder.typicode.com/users' , data).then(res=>{
-            console.log(res);
-        });
+        if (!userId) {
+            axios.post('https://jsonplaceholder.typicode.com/users' , data).then(res=>{
+                console.log(res);
+                swal(`${res.data.name} با موفقیت ایجاد شد`, {
+                    icon: "success",
+                    buttons: "متوجه شدم",            
+                });
+            });
+        }else{
+            axios.put(`https://jsonplaceholder.typicode.com/users/${userId}` , data).then(res=>{
+                console.log(res);
+                swal(`${res.data.name} با موفقیت ویرایش شد`, {
+                    icon: "success",
+                    buttons: "متوجه شدم",            
+                });
+            });
+        }
+
     }
+
+    
     
 
     return (

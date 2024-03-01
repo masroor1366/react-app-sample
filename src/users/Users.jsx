@@ -117,7 +117,7 @@ const Users = ()=>{
                             <i className="fas fa-edit text-warning mx-2 pointer"
                                 onClick={()=>{
                                     //action...
-                                    return navigate("/user/add/2",{state:{x:2,y:3}})
+                                    return navigate(`/user/add/${u.id}`,{state:{x:2,y:3}})
                                 }}                            
                             ></i>
                              
