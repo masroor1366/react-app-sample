@@ -144,4 +144,4 @@ const Users = (props)=>{
 
 }
 
-export default  WithAlert(Users)  ;
+export default  Users  ;
