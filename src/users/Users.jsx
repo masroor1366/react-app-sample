@@ -9,6 +9,7 @@ const Users = ()=>{
 
 
     const [users,setUsers]=useState([]);
+    const [mainUsers,setMainUsers]=useState([]);
 
 
     useEffect(()=>{
@@ -16,12 +17,17 @@ const Users = ()=>{
             let myres = res.data;
             myres=[...myres,{id:66,name: 'Mohammad Ali Masroor', username:'Masroor1366',email:'Masroor.1388@gmail.com'}]
              setUsers(myres)
+             setMainUsers(myres);
 
              
         }).catch(err=>{
             console.log(err)
         })
     },[]);
+
+    const handleSearch=(e)=>{
+        setUsers(mainUsers.filter(u=>u.name.includes(e.target.value)))
+    }
     const navigate=useNavigate();
     const param=useLocation();
     console.log('param پارامتری که از زدن دکمه برگشت در اینجا دریافت می وشد')
@@ -76,7 +82,7 @@ const Users = ()=>{
             <h4 className="text-center">مدیریت کاربران</h4>
             <div className="row my-2 mb-4 justify-content-between w-100 mx-0">
                 <div className="form-group col-10 col-md-6 col-lg-4">
-                    <input type="text" className="form-control shadow" placeholder="جستجو"/>
+                    <input type="text" className="form-control shadow" placeholder="جستجو" onChange={handleSearch}/>
                 </div>
                 <div className="col-2 text-start px-0">
                 <Link to="/user/add">
