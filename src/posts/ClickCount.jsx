@@ -12,4 +12,4 @@ const ClickCount = (props)=>{
     )
 }
 
-export default Counter(ClickCount);
+export default Counter(ClickCount,5);
