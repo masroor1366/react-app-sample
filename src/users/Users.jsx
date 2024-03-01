@@ -4,10 +4,11 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
 import WithAlert from '../HOC/WithAlert';
+import { Alert, Confirm } from '../utils/Alerts';
 
 const Users = (props)=>{
 
-    const {Confirm,Alert}=props
+    // const {Confirm,Alert}=props
 
 
 
