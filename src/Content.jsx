@@ -9,6 +9,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import AddUser from './users/AddUser';
 import EditDesc from './users/EditDesc';
 import WithAlert2 from './HOC/WithAlert2';
+import AddPost2 from './posts/AddPost2';
 
 const Content = ()=>{
 
@@ -43,6 +44,10 @@ const Content = ()=>{
                     // <Route path='edit/:id' element={<EditDesc/>}></Route> // نکته: اول path نباید / آورده شود
                 </Route>
                 <Route path='/posts' element={<Posts/>}></Route>
+                <Route path='/posts/add' element={<AddPost2/>}>
+                    <Route path=':postId'/>
+                </Route>
+               
                 <Route path='/gallery' element={<Gallery/>}></Route>
                 <Route path='/todos/*'  element={ <Todos/>}></Route>
                 <Route path='*' element={

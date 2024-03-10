@@ -47,7 +47,7 @@ const Posts = ()=>{
     useEffect(()=>{
         return()=>{
             console.log("destroy component")
-            swal("شما کامپوننت را ترک کردید")
+          //  swal("شما کامپوننت را ترک کردید")
         }
        
          
@@ -69,7 +69,7 @@ const Posts = ()=>{
                 <input type="number" className="form-control shadow" placeholder="جستجو" value={uId} onChange={(e)=>{setUId(e.target.value)}}/>
             </div>
             <div className="col-2 text-start px-0">
-                <Link to="/post/add">
+                <Link to="/posts/add">
                     <button className="btn btn-success">
                         <i className="fas fa-plus text-light"></i>
                     </button>
