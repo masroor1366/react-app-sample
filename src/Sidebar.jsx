@@ -33,6 +33,13 @@ const Sidebar = ()=>{
                 کارها
                 </li>
                 </NavLink>
+
+                <NavLink className={({isActive})=>{return isActive ? "active_nav" : ""}} to="/redux">
+                <li>
+                Redux
+                </li>
+                </NavLink>
+
             </ul>
         </div>
     )

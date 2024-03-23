@@ -10,6 +10,7 @@ import AddUser from './users/AddUser';
 import EditDesc from './users/EditDesc';
 import WithAlert2 from './HOC/WithAlert2';
 import AddPost2 from './posts/AddPost2';
+import ReduxSample from './redux/ReduxSample';
 
 const Content = ()=>{
 
@@ -49,6 +50,7 @@ const Content = ()=>{
                 </Route>
                
                 <Route path='/gallery' element={<Gallery/>}></Route>
+                <Route path='/redux' element={<ReduxSample/>}></Route>
                 <Route path='/todos/*'  element={ <Todos/>}></Route>
                 <Route path='*' element={
                     <WithAlert2>
